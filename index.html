@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Textos Técnicos — Claro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f3ef;
+    --paper-deep:#eae8e1;
+    --ink:#201f1c;
+    --ink-soft:#5c5a54;
+    --line:#d8d5cc;
+    --claro:#da291c;
+    --claro-deep:#a81f15;
+    --steel:#3d4a56;
+    --steel-soft:#eef1f3;
+    --ok:#1f7a4d;
+    --ok-bg:#e6f4ec;
+    --whatsapp:#25943f;
+    --headerbg:#171512;
+    --card:#ffffff;
+    --radius:14px;
+  }
+  body[data-theme="dark"]{
+    --paper:#1b1916;
+    --paper-deep:#242119;
+    --ink:#f3f1ea;
+    --ink-soft:#b5b0a4;
+    --line:#3a362e;
+    --card:#242119;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      repeating-linear-gradient(180deg, transparent 0 39px, rgba(0,0,0,.025) 39px 40px),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Inter', system-ui, -apple-system, sans-serif;
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px;}
+
+  /* ===== HEADER / LOGOS ===== */
+  header.top{
+    padding:18px 16px 16px;
+    background:var(--headerbg);
+    color:#fff;
+  }
+  .brandrow{
+    max-width:640px;margin:0 auto;
+    display:flex;align-items:center;justify-content:flex-start;gap:14px;
+  }
+  .brand-mark{display:flex;align-items:center;gap:10px;}
+  .claro-badge{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--claro);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 2px rgba(255,255,255,.15) inset;
+  }
+  .claro-badge span{
+    font-family:'Barlow Condensed',sans-serif;
+    font-style:italic;font-weight:700;font-size:.72rem;color:#fff;letter-spacing:.5px;
+  }
+  .claro-word{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:.5px;}
+  .divider-x{width:1px;height:26px;background:rgba(255,255,255,.25);}
+  .danlex-mark{display:flex;align-items:center;gap:8px;}
+  .danlex-icon{
+    width:30px;height:30px;border-radius:7px;
+    background:var(--steel);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .danlex-icon svg{width:16px;height:16px;}
+  .danlex-word{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.92rem;letter-spacing:.5px;line-height:1.05;}
+  .danlex-word small{display:block;font-size:.6rem;color:#c9c6bd;font-weight:500;letter-spacing:1px;text-transform:uppercase;}
+
+  .titlebar{
+    max-width:640px;margin:14px auto 0;
+    display:flex;align-items:baseline;justify-content:space-between;
+  }
+  .titlebar h1{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:1.5rem;font-weight:700;letter-spacing:.3px;margin:0;color:#fff;
+  }
+  .titlebar .stamp{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:#c9c6bd;
+    border:1px solid rgba(255,255,255,.25);padding:3px 8px;border-radius:20px;
+  }
+  .header-actions{display:flex;gap:6px;}
+
+  /* ===== HOME GRID ===== */
+  .home-grid{
+    display:flex;flex-direction:column;gap:12px;
+    margin-top:18px;
+  }
+  .func-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 14px;
+    text-align:left;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:transform .12s, box-shadow .12s;
+  }
+  .func-card:active{transform:scale(.97);}
+  .func-card::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--claro);
+  }
+  .func-card .fnum{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);
+  }
+  .func-card h3{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:1.15rem;font-weight:700;margin:4px 0 6px;color:var(--ink);
+  }
+  .func-card p{font-size:.76rem;color:var(--ink-soft);margin:0;line-height:1.3;}
+  .func-card .tags{margin-top:10px;display:flex;gap:5px;flex-wrap:wrap;}
+  .tag{
+    font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.4px;
+    background:var(--steel-soft);color:var(--steel);padding:2px 7px;border-radius:20px;
+  }
+  .tag.wa{background:#e6f5ea;color:var(--whatsapp);}
+
+  /* ===== FUNCTION VIEW ===== */
+  .func-view{display:none;margin-top:18px;}
+  .func-view.active{display:block;}
+  .back-btn{
+    background:none;border:none;color:var(--ink-soft);font-size:.85rem;
+    display:flex;align-items:center;gap:6px;padding:8px 0;cursor:pointer;font-weight:500;
+  }
+  .back-btn:active{opacity:.6;}
+
+  .ticket{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 18px;position:relative;
+    box-shadow:0 1px 2px rgba(0,0,0,.04);
+  }
+  .ticket-head{
+    display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;
+  }
+  .ticket-head h2{
+    font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;margin:0;
+  }
+  .step-count{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft);
+  }
+
+  .progress{
+    display:flex;gap:4px;margin-bottom:18px;
+  }
+  .progress i{
+    flex:1;height:3px;background:var(--line);border-radius:2px;
+  }
+  .progress i.done{background:var(--claro);}
+
+  .answered-list{
+    display:flex;flex-direction:column;gap:6px;margin-bottom:16px;
+  }
+  .answered-item{
+    display:flex;justify-content:space-between;gap:10px;
+    font-size:.78rem;padding:7px 10px;background:var(--paper);border-radius:8px;
+    border:1px dashed var(--line);
+  }
+  .answered-item b{color:var(--ink-soft);font-weight:600;min-width:38%;}
+  .answered-item span{
+    font-family:'IBM Plex Mono',monospace;color:var(--ink);text-align:right;word-break:break-word;
+  }
+
+  .q-label{
+    font-size:.78rem;color:var(--claro-deep);font-weight:600;
+    text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;
+  }
+  .q-text{
+    font-size:1.05rem;font-weight:500;margin-bottom:12px;line-height:1.35;
+  }
+  input[type=text], input[type=number], textarea{
+    width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;
+    font-size:1rem;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);
+    outline:none;transition:border-color .15s;
+  }
+  input[type=text]:focus, input[type=number]:focus, textarea:focus{border-color:var(--claro);background:var(--card);}
+  textarea{resize:vertical;min-height:90px;font-family:'Inter',sans-serif;line-height:1.4;}
+
+  .fmt-warn{display:none;font-size:.74rem;color:var(--claro-deep);margin-top:6px;line-height:1.35;}
+  .fmt-warn.show{display:block;}
+  .mix-warn{
+    display:none;background:rgba(218,41,28,.08);border:1px solid var(--claro);
+    color:var(--claro-deep);padding:10px 12px;border-radius:10px;
+    font-size:.82rem;line-height:1.4;margin-top:10px;
+  }
+  .mix-warn.show{display:block;}
+
+  .chip-repeat{
+    display:inline-flex;align-items:center;gap:5px;
+    background:var(--steel-soft);color:var(--steel);border:none;
+    font-size:.76rem;font-weight:600;padding:8px 12px;border-radius:20px;
+    margin-top:10px;width:auto;
+  }
+
+  .draft-banner{
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+    background:var(--ok-bg);color:var(--ok);border-radius:8px;
+    font-size:.76rem;padding:8px 10px;margin-bottom:14px;
+  }
+  .draft-banner button{
+    background:none;border:none;color:var(--ok);text-decoration:underline;
+    font-size:.72rem;font-weight:600;padding:2px;width:auto;
+  }
+
+  .btnrow{display:flex;gap:10px;margin-top:16px;}
+  button{
+    font-family:'Inter',sans-serif;cursor:pointer;border:none;border-radius:10px;
+    font-weight:600;font-size:.92rem;padding:13px 16px;transition:opacity .12s, transform .08s;
+  }
+  button:active{transform:scale(.98);}
+  .btn-primary{background:var(--claro);color:#fff;flex:1;}
+  .btn-primary:disabled{opacity:.35;cursor:not-allowed;}
+  .btn-ghost{background:transparent;color:var(--ink-soft);border:1.5px solid var(--line);}
+  .btn-outline{background:var(--card);color:var(--ink);border:1.5px solid var(--line);}
+
+  /* ===== PHOTO STEP ===== */
+  .photo-zone{
+    display:flex;align-items:center;gap:14px;
+    border:1.5px solid var(--line);border-radius:12px;padding:16px;text-align:left;
+    background:var(--card);cursor:pointer;transition:border-color .15s, background .15s;
+  }
+  .photo-zone:active{border-color:var(--claro);background:var(--paper);}
+  .photo-zone .icon-circle{
+    width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--steel-soft);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .photo-zone svg{width:22px;height:22px;color:var(--steel);}
+  .photo-zone .txt p{margin:0 0 2px;font-size:.9rem;font-weight:600;color:var(--ink);}
+  .photo-zone .txt span{font-size:.74rem;color:var(--ink-soft);}
+
+  .single-preview{
+    display:flex;align-items:center;gap:12px;
+    border:1.5px solid var(--line);border-radius:12px;padding:10px;background:var(--card);
+  }
+  .single-preview img, .single-preview video{width:60px;height:60px;object-fit:cover;border-radius:9px;border:1px solid var(--line);}
+  .single-preview .txt{flex:1;font-size:.82rem;color:var(--ink-soft);}
+  .single-preview .txt b{display:block;color:var(--ink);font-size:.88rem;margin-bottom:2px;}
+  .single-preview button, .single-preview label{
+    background:var(--paper);border:1.5px solid var(--line);color:var(--ink);padding:9px 12px;
+    font-size:.8rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+    border-radius:10px;font-weight:600;font-family:'Inter',sans-serif;
+  }
+
+  .photo-grid{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+  .photo-thumb{
+    position:relative;width:74px;height:74px;border-radius:9px;overflow:hidden;border:1px solid var(--line);
+  }
+  .photo-thumb img, .photo-thumb video{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo-thumb button{
+    position:absolute;top:2px;right:2px;background:rgba(0,0,0,.65);color:#fff;
+    width:20px;height:20px;border-radius:50%;font-size:.7rem;line-height:1;padding:0;border:none;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ===== FINAL REPORT ===== */
+  .report-box{
+    background:#1b1a17;color:#f4f3ef;border-radius:10px;padding:16px;
+    font-family:'IBM Plex Mono',monospace;font-size:.86rem;line-height:1.6;
+    white-space:pre-wrap;word-break:break-word;
+  }
+  .report-box b{color:var(--claro);font-weight:700;}
+  .final-photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+  .final-photos img, .final-photos video{width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line);}
+
+  .action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+  .btn-whatsapp{
+    background:var(--whatsapp);color:#fff;grid-column:1/-1;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .btn-whatsapp svg{width:18px;height:18px;fill:#fff;}
+  .toast{
+    position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+    background:#171512;color:#fff;padding:10px 18px;border-radius:30px;font-size:.82rem;
+    opacity:0;pointer-events:none;transition:opacity .2s, bottom .2s;z-index:50;
+  }
+  .toast.show{opacity:1;bottom:26px;}
+
+  .hint{font-size:.74rem;color:var(--ink-soft);margin-top:8px;line-height:1.4;}
+  .obs-textarea{min-height:130px;}
+  .refine-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+  .refine-row button{flex:1;}
+  .loader{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--ink-soft);padding:10px 0;}
+  .dot-spin{width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--claro);border-radius:50%;animation:spin .7s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ===== SOBRE (modal) ===== */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(20,18,16,.6);
+    align-items:center;justify-content:center;padding:20px;z-index:100;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal-box{
+    background:var(--card);border-radius:16px;padding:26px 22px;max-width:420px;width:100%;
+    position:relative;box-shadow:0 20px 50px rgba(0,0,0,.25);
+  }
+  .modal-close{
+    position:absolute;top:12px;right:12px;background:var(--paper);border:none;
+    width:30px;height:30px;border-radius:50%;font-size:.85rem;color:var(--ink-soft);
+  }
+  .modal-badge{
+    display:inline-block;background:var(--steel-soft);color:var(--steel);
+    font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+    padding:4px 10px;border-radius:20px;margin-bottom:10px;
+  }
+  .modal-box h2{
+    font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:700;margin:0 0 10px;
+  }
+  .modal-box p{font-size:.9rem;line-height:1.55;color:var(--ink-soft);margin:0;}
+
+  .hist-item{
+    border:1px dashed var(--line);border-radius:10px;padding:10px;
+    margin-bottom:10px;background:var(--paper);
+  }
+  .hist-meta{display:flex;justify-content:space-between;gap:8px;font-size:.7rem;color:var(--ink-soft);margin-bottom:4px;}
+  .hist-preview{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--ink);
+    white-space:pre-wrap;word-break:break-word;
+  }
+
+  .cod-table{
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  }
+  .cod-row{
+    display:grid;grid-template-columns:90px 1fr;
+    border-bottom:1px solid var(--line);
+  }
+  .cod-row:last-child{border-bottom:none;}
+  .cod-row span{padding:9px 12px;font-size:.86rem;}
+  .cod-row span:first-child{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--claro-deep);
+    border-right:1px solid var(--line);
+  }
+  .cod-head{background:var(--headerbg);}
+  .cod-head span{color:#fff;font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.4px;}
+  .cod-head span:first-child{border-right:1px solid rgba(255,255,255,.15);}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="brandrow">
+    <div class="brand-mark">
+      <div class="claro-badge"><span>claro</span></div>
+      <div class="claro-word">Claro</div>
+    </div>
+  </div>
+  <div class="titlebar">
+    <h1>Textos Técnicos</h1>
+    <div class="header-actions">
+      <button class="stamp" onclick="alternarTema()" id="temaBtn" style="cursor:pointer;">Escuro</button>
+      <button class="stamp" onclick="abrirHistorico()" style="cursor:pointer;">Histórico</button>
+      <button class="stamp" onclick="abrirSobre()" style="cursor:pointer;">Sobre</button>
+    </div>
+  </div>
+</header>
+
+<div class="modal-overlay" id="sobreOverlay" onclick="if(event.target===this) fecharSobre()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharSobre()">✕</button>
+    <div class="modal-badge">Sobre esta página</div>
+    <h2>Idealizada por Lucas Ricardo</h2>
+    <p>Esta página foi criada e idealizada por Lucas Ricardo, técnico de campo, para facilitar o dia a dia da equipe: agilizar o preenchimento de manobras, consultivos, validações, observações de OS e quebras, deixando os relatórios padronizados, revisados e prontos para copiar e colar em poucos segundos.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="historicoOverlay" onclick="if(event.target===this) fecharHistorico()">
+  <div class="modal-box" style="max-height:78vh;overflow:auto;">
+    <button class="modal-close" onclick="fecharHistorico()">✕</button>
+    <div class="modal-badge">Histórico</div>
+    <h2>Últimos relatórios</h2>
+    <div id="historicoLista"></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- HOME -->
+  <div id="home" class="home-grid">
+    <button class="func-card" onclick="abrirFuncao('manobra')">
+      <h3>Manobra</h3>
+      <p>Contrato, NAPs, motivo</p>
+    </button>
+    <button class="func-card" onclick="abrirFuncao('consultivo')">
+      <h3>Consultivo</h3>
+      <p>Instalação, O.S./Serial</p>
+    </button>
+    <button class="func-card" onclick="abrirFuncao('validacao')">
+      <h3>Validação</h3>
+      <p>Fato, causa, ação, sinal</p>
+    </button>
+    <button class="func-card" onclick="abrirFuncao('quebra')">
+      <h3>Quebra</h3>
+      <p>Contrato, janela, cód. baixa e observação</p>
+    </button>
+    <button class="func-card" onclick="abrirFuncao('nap_lotada')">
+      <h3>NAP Lotada</h3>
+      <p>Drops, vagas liberadas, validado</p>
+    </button>
+    <button class="func-card" onclick="abrirFuncao('tratativa')">
+      <h3>Tratativa</h3>
+      <p>Ocorrência, atendente, supervisor, prazo</p>
+    </button>
+    <button class="func-card" onclick="abrirCodigos()">
+      <h3>Códigos das Cidades</h3>
+      <p>Consulta rápida de código x cidade</p>
+    </button>
+  </div>
+
+  <!-- FUNCTION VIEWS (perguntas / foto / final) -->
+  <div id="view-manobra" class="func-view"></div>
+  <div id="view-consultivo" class="func-view"></div>
+  <div id="view-validacao" class="func-view"></div>
+  <div id="view-quebra" class="func-view"></div>
+  <div id="view-nap_lotada" class="func-view"></div>
+  <div id="view-tratativa" class="func-view"></div>
+  <div id="view-codigos" class="func-view"></div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ CONFIG ============ */
+function abrirSobre(){ document.getElementById('sobreOverlay').classList.add('show'); }
+function fecharSobre(){ document.getElementById('sobreOverlay').classList.remove('show'); }
+
+/* ---- Tema claro/escuro ---- */
+function aplicarTema(){
+  let tema = 'claro';
+  try{ tema = localStorage.getItem('tema') || 'claro'; }catch(e){}
+  document.body.setAttribute('data-theme', tema==='escuro' ? 'dark' : 'light');
+  const btn = document.getElementById('temaBtn');
+  if(btn) btn.textContent = tema==='escuro' ? 'Claro' : 'Escuro';
+}
+function alternarTema(){
+  let tema = 'claro';
+  try{ tema = localStorage.getItem('tema') || 'claro'; }catch(e){}
+  tema = tema==='escuro' ? 'claro' : 'escuro';
+  try{ localStorage.setItem('tema', tema); }catch(e){}
+  aplicarTema();
+}
+
+/* ---- Status de conexão ---- */
+/* ---- Histórico de relatórios gerados ---- */
+let historicoAtual = [];
+function salvarHistorico(tipo, texto){
+  try{
+    let hist = JSON.parse(localStorage.getItem('historico_relatorios') || '[]');
+    if(hist.length && hist[0].texto===texto && hist[0].tipo===tipo) return;
+    hist.unshift({tipo, texto, data:new Date().toLocaleString('pt-BR')});
+    hist = hist.slice(0,20);
+    localStorage.setItem('historico_relatorios', JSON.stringify(hist));
+  }catch(e){}
+}
+function abrirHistorico(){
+  try{ historicoAtual = JSON.parse(localStorage.getItem('historico_relatorios') || '[]'); }catch(e){ historicoAtual = []; }
+  const lista = document.getElementById('historicoLista');
+  lista.innerHTML = historicoAtual.length ? historicoAtual.map((h,i)=>`
+    <div class="hist-item">
+      <div class="hist-meta"><b>${esc(h.tipo)}</b><span>${esc(h.data)}</span></div>
+      <div class="hist-preview">${esc(h.texto.slice(0,90))}${h.texto.length>90?'…':''}</div>
+      <button class="btn-outline hist-copy" style="width:100%;margin-top:6px;" data-idx="${i}">Copiar</button>
+    </div>
+  `).join('') : '<p style="font-size:.85rem;color:var(--ink-soft);">Nenhum relatório gerado ainda.</p>';
+  lista.querySelectorAll('.hist-copy').forEach(btn=>{
+    btn.addEventListener('click', ()=> copiar(historicoAtual[+btn.dataset.idx].texto));
+  });
+  document.getElementById('historicoOverlay').classList.add('show');
+}
+function fecharHistorico(){ document.getElementById('historicoOverlay').classList.remove('show'); }
+
+/* ---- Rascunho automático ---- */
+function salvarRascunho(key){
+  try{ localStorage.setItem('rascunho_'+key, JSON.stringify({values:state[key].values})); }catch(e){}
+}
+function carregarRascunho(key){
+  try{ const raw = localStorage.getItem('rascunho_'+key); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
+}
+function limparRascunho(key){
+  try{ localStorage.removeItem('rascunho_'+key); }catch(e){}
+}
+function descartarRascunho(key){
+  limparRascunho(key);
+  state[key] = {values:{}, step:'perguntas'};
+  renderPerguntas(key);
+}
+
+/* ---- Repetir CONTRATO/CIDADE ---- */
+const REPETIVEIS = ['contrato','cidade','login'];
+function obterUltimos(){
+  try{ return JSON.parse(localStorage.getItem('ultimos_valores') || '{}'); }catch(e){ return {}; }
+}
+function salvarUltimo(k,v){
+  try{ const uv = obterUltimos(); uv[k]=v; localStorage.setItem('ultimos_valores', JSON.stringify(uv)); }catch(e){}
+}
+function repetirValor(key, campoKey){
+  const uv = obterUltimos();
+  const val = uv[campoKey];
+  if(!val) return;
+  state[key].values[campoKey] = val;
+  salvarRascunho(key);
+  renderPerguntas(key);
+}
+
+/* ---- Validação leve de formato ---- */
+function avisoFormato(campoKey, valor){
+  if(!valor) return '';
+  if(campoKey==='contrato'){
+    return /^\d+(\/\d+)?$/.test(valor) ? '' : 'Formato incomum — normalmente só números (ex: 1064248 ou 56/3650460)';
+  }
+  if(campoKey==='nap_sistema' || campoKey==='nap_conectada'){
+    return /^[A-Za-z]+\.[A-Za-z0-9.]+$/.test(valor) ? '' : 'Formato incomum de NAP (ex: SULAE.061.05.06)';
+  }
+  return '';
+}
+
+const NOMES = {
+  manobra:'Manobra', consultivo:'Consultivo', validacao:'Validação', quebra:'Quebra', nap_lotada:'NAP Lotada', tratativa:'Tratativa'
+};
+
+const FOTO_TIPO = { manobra:'single', validacao:'multi', quebra:'multi', nap_lotada:'multi' };
+
+const state = {}; // por função: {values, step, photos, fotoConfirmada}
+['manobra','consultivo','validacao','quebra','nap_lotada','tratativa'].forEach(k=>{
+  state[k] = {values:{}, step:'perguntas', photos:[], fotoConfirmada:false};
+});
+
+/* ============ HELPERS ============ */
+function f(key,label,pergunta,tipo){ return {key,label,pergunta,tipo:tipo||'text'}; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._tm); t._tm = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+function copiar(texto){
+  function copiarFallback(){
+    try{
+      const ta = document.createElement('textarea');
+      ta.value = texto;
+      ta.style.position = 'fixed';
+      ta.style.top = '-9999px';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      toast(ok ? 'Texto copiado!' : 'Não foi possível copiar');
+    }catch(e){
+      toast('Não foi possível copiar');
+    }
+  }
+
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(texto).then(()=>toast('Texto copiado!')).catch(copiarFallback);
+  }else{
+    copiarFallback();
+  }
+}
+
+function normalizarProduto(p){
+  return (p||'')
+    .replace(/wi[\s-]?fi\s*mesh/gi,'Wi-Fi Mesh')
+    .replace(/tv\s*boc|tv\s*box/gi,'TV Box');
+}
+
+async function enviarWhatsApp(texto, photos){
+  const temAnexos = photos && photos.length;
+  const tipos = temAnexos ? [...new Set(photos.map(p=>p.tipo || 'image'))] : [];
+  const misturado = tipos.length > 1; // foto(s) + vídeo(s) juntos
+
+  // WhatsApp não aceita bem o envio combinado de fotos e vídeos numa
+  // única mensagem compartilhada pelo navegador — nesses casos vai direto
+  // pro fallback (texto puro). O aviso sobre anexar manualmente fica só
+  // na página (antes de chegar aqui), pra não vir junto do texto da mensagem.
+  if(temAnexos && !misturado && navigator.canShare){
+    try{
+      const files = photos.map(p=>p.file);
+      if(navigator.canShare({files})){
+        await navigator.share({text:texto, files});
+        return;
+      }
+    }catch(e){
+      if(e && e.name==='AbortError') return;
+    }
+  }
+
+  window.open('https://wa.me/?text=' + encodeURIComponent(texto), '_blank');
+}
+
+/* ============ NAVEGAÇÃO ============ */
+function abrirFuncao(key){
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('view-'+key).classList.add('active');
+  const draft = carregarRascunho(key);
+  if(draft && draft.values && Object.keys(draft.values).length){
+    state[key].values = draft.values;
+    state[key]._recuperado = true;
+  }
+  renderPerguntas(key);
+}
+function voltarHome(key){
+  limparRascunho(key);
+  state[key] = {values:{}, step:'perguntas', photos:[], fotoConfirmada:false};
+  document.getElementById('view-'+key).classList.remove('active');
+  document.getElementById('view-'+key).innerHTML = '';
+  document.getElementById('home').style.display = 'grid';
+}
+
+/* ============ FLUXOS (uma pergunta por vez) ============ */
+const FLOWS = {
+  manobra(v){
+    if(!v.tecnico) return f('tecnico','Técnico','Qual o nome do técnico responsável?');
+    if(!v.contrato) return f('contrato','Contrato','Qual o número do CONTRATO?');
+    if(!v.cidade) return f('cidade','Cidade','Qual a CIDADE?');
+    if(!v.nap_sistema) return f('nap_sistema','Nap Sistema','Qual a NAP SISTEMA?');
+    if(!v.nap_conectada) return f('nap_conectada','Nap Conectada','Qual a NAP CONECTADA?');
+    if(!v.data) return f('data','Data','Qual a DATA? (DD/MM/AAAA)','data');
+    if(!v.motivo) return f('motivo','Motivo','Qual o MOTIVO da manobra?','area');
+    return null;
+  },
+  consultivo(v){
+    if(!v.tecnico) return f('tecnico','Técnico','Qual o nome do técnico responsável?');
+    if(!v.login) return f('login','Login','Qual o LOGIN do técnico?');
+    if(!v.data) return f('data','Data','Qual a DATA? (DD/MM/AAAA)','data');
+    if(!v.contrato) return f('contrato','Contrato','Qual o número do CONTRATO?');
+    if(!v.supervisor) return f('supervisor','Supervisor','Qual o nome do SUPERVISOR?');
+    if(!v.cidade) return f('cidade','Cidade da venda','Qual a CIDADE DA VENDA?');
+    if(!v.quantidade) return f('quantidade','Quantidade','Qual a QUANTIDADE de itens?','numero');
+    if(!v.produto) return f('produto','Produto','Qual o PRODUTO?');
+    const qtd = parseInt(v.quantidade,10) || 0;
+    for(let i=1;i<=qtd;i++){
+      if(!v['os_'+i]) return f('os_'+i,'O.S. '+i,'Qual o NÚMERO DA O.S. '+i+'?');
+      if(!v['serial_'+i]) return f('serial_'+i,'Serial '+i,'Qual o SERIAL '+i+'?');
+    }
+    return null;
+  },
+  validacao(v){
+    if(!v.tecnico) return f('tecnico','Técnico','Qual o nome do técnico responsável?');
+    if(!v.contrato) return f('contrato','Contrato','Qual o CONTRATO?');
+    if(!v.fato) return f('fato','Fato','Qual o FATO?','area');
+    if(!v.causa) return f('causa','Causa','Qual a CAUSA?','area');
+    if(!v.acao) return f('acao','Ação','Qual a AÇÃO realizada?','area');
+    if(!v.cidade) return f('cidade','Cidade','Qual a CIDADE?');
+    if(!v.log) return f('log','Log','Qual o LOG?');
+    if(!v.rx) return f('rx','RX','Qual o RX?');
+    if(!v.cod) return f('cod','Cód.','Qual o CÓD.?');
+    if(!v.validado) return f('validado','Validado','Quem VALIDOU?');
+    return null;
+  },
+  quebra(v){
+    if(!v.tecnico) return f('tecnico','Técnico','Qual o nome do técnico responsável?');
+    if(!v.contrato) return f('contrato','Contrato','Qual o CONTRATO?');
+    if(!v.janela) return f('janela','Janela','Qual a JANELA de horário?');
+    if(!v.cidade) return f('cidade','Cidade','Qual a CIDADE?');
+    if(!v.cod_baixa) return f('cod_baixa','Cód. Baixa','Qual o COD BAIXA?');
+    if(!v.motivo) return f('motivo','Motivo','Qual o MOTIVO?','area');
+    if(!v.observacao) return f('observacao','Observação','Qual a OBSERVAÇÃO?','area');
+    return null;
+  },
+  nap_lotada(v){
+    if(!v.tecnico) return f('tecnico','Técnico','Qual o nome do técnico responsável?');
+    if(!v.data) return f('data','Data','Qual a DATA? (DD/MM/AAAA)','data');
+    if(!v.contrato) return f('contrato','Contrato','Qual o número do CONTRATO?');
+    if(!v.cidade) return f('cidade','Cidade','Qual a CIDADE?');
+    if(!v.nap) return f('nap','Nap Lotada','Qual o número da NAP LOTADA?');
+    if(!v.drops_id) return f('drops_id','Drops c/ identificação','Quais os DROPS COM IDENTIFICAÇÃO? (números dos cabos identificados, separados por vírgula)');
+    if(!v.drops_desc) return f('drops_desc','Drops desconectados','Quais os DROPS DESCONECTADOS? (após validação do supervisor e checagem com splitter/Power Meter)');
+    if(!v.vagas) return f('vagas','Vagas liberadas','Quantas portas liberadas?','numero');
+    if(!v.validado) return f('validado','Validado','Quem VALIDOU?');
+    return null;
+  },
+  tratativa(v){
+    if(!v.contrato) return f('contrato','Contrato','Qual o CONTRATO?');
+    if(!v.tecnico) return f('tecnico','Nome do técnico','Qual o nome do TÉCNICO?');
+    if(!v.loguin_tecnico) return f('loguin_tecnico','Login do técnico','Qual o LOGIN do técnico?');
+    if(!v.nome_atendente) return f('nome_atendente','Nome da atendente','Qual o NOME da atendente?');
+    if(!v.login_atendente) return f('login_atendente','Login da atendente','Qual o LOGIN da atendente?');
+    if(!v.num_ocorrencia) return f('num_ocorrencia','Número da ocorrência','Qual o NÚMERO da ocorrência?');
+    if(!v.nome_ocorrencia) return f('nome_ocorrencia','Nome da ocorrência','Qual o NOME da ocorrência?');
+    if(!v.supervisor) return f('supervisor','Nome do supervisor','Qual o nome do SUPERVISOR (da atendente)?');
+    if(!v.prazo) return f('prazo','Prazo da tratativa','Qual o PRAZO da tratativa?');
+    return null;
+  }
+};
+
+const TOTAL_CAMPOS = { manobra:7, consultivo:8, validacao:10, quebra:7, nap_lotada:9, tratativa:9 };
+
+const TEMPLATES = {
+  manobra(v){
+    return `*CONTRATO:* ${v.contrato}\n*TÉCNICO:* ${v.tecnico}\n*CIDADE:* ${v.cidade}\n*NAP SISTEMA:* ${v.nap_sistema}\n*NAP CONECTADA:* ${v.nap_conectada}\n*DATA:* ${v.data}\n*MOTIVO:* ${v.motivo}`;
+  },
+  consultivo(v){
+    const qtd = parseInt(v.quantidade,10) || 0;
+    let blocos = '';
+    for(let i=1;i<=qtd;i++){
+      blocos += `*NÚMERO DA O.S. ${i}:* ${v['os_'+i]}\n*SERIAL ${i}:* ${v['serial_'+i]}\n`;
+    }
+    return `*DATA:* ${v.data}\n*LOGIN:* ${v.login}\n*CONTRATO:* ${v.contrato}\n*TÉCNICO:* ${v.tecnico}\n*SUPERVISOR:* ${v.supervisor}\n*CIDADE DA VENDA:* ${v.cidade}\n*QUANTIDADE:* ${v.quantidade}\n*PRODUTO:* ${normalizarProduto(v.produto)}\n*ÁREA:* Instalação\n\n${blocos}\n*ATLAS:* ASSINANTE\n*STATUS:* BAIXADO E INSTALADO`;
+  },
+  validacao(v){
+    return `CONTRATO: ${v.contrato}\nFATO: ${v.fato}\nCAUSA: ${v.causa}\nAÇÃO: ${v.acao}\nCIDADE: ${v.cidade}\nTÉCNICO: ${v.tecnico}\nLOG: ${v.log}\nRX: ${v.rx}\nCÓD.: ${v.cod}\nTNPS: ORIENTADO\nVALIDADO: ${v.validado}`;
+  },
+  quebra(v){
+    return `TÉCNICO: ${v.tecnico}\nCONTRATO: ${v.contrato}\nJANELA: ${v.janela}\nCIDADE: ${v.cidade}\nCOD BAIXA: ${v.cod_baixa}\nMOTIVO: ${v.motivo}\nOBSERVAÇÃO: ${v.observacao}`;
+  },
+  nap_lotada(v){
+    return `Técnico: ${v.tecnico}\nData: ${v.data}\nContrato: ${v.contrato}\nCidade: ${v.cidade}\nNap lotada: ${v.nap}\nDrops com identificação: ${v.drops_id}\nDrops desconectados: ${v.drops_desc}\nVagas liberadas: ${v.vagas}\nValidado: ${v.validado}`;
+  },
+  tratativa(v){
+    return `Contrato: ${v.contrato}\nNome do técnico: ${v.tecnico}\nLogin do técnico: ${v.loguin_tecnico}\nNome da atendente: ${v.nome_atendente}\nLogin da atendente: ${v.login_atendente}\nNúmero da ocorrência: ${v.num_ocorrencia}\nNome da ocorrência: ${v.nome_ocorrencia}\nNome do supervisor: ${v.supervisor}\nPrazo da tratativa: ${v.prazo}`;
+  }
+};
+
+/* ============ RENDER: PERGUNTAS ============ */
+function renderPerguntas(key){
+  const st = state[key];
+  const campo = FLOWS[key](st.values);
+  const view = document.getElementById('view-'+key);
+
+  if(!campo){
+    if(FOTO_TIPO[key] && !st.fotoConfirmada){ renderFoto(key); return; }
+    st.step='final'; renderFinal(key); return;
+  }
+
+  const answeredKeys = Object.keys(st.values);
+  const total = TOTAL_CAMPOS[key];
+  const doneCount = answeredKeys.length;
+
+  let dots = '';
+  for(let i=0;i<total;i++) dots += `<i class="${i<doneCount?'done':''}"></i>`;
+
+  let answeredHtml = '';
+  if(doneCount){
+    answeredHtml = '<div class="answered-list">' + answeredKeys.map(k=>{
+      const label = labelDeCampo(key,k);
+      return `<div class="answered-item"><b>${esc(label)}</b><span>${esc(st.values[k])}</span></div>`;
+    }).join('') + '</div>';
+  }
+
+  const isArea = campo.tipo==='area';
+  const isNum = campo.tipo==='numero';
+  const isData = campo.tipo==='data';
+
+  const mostrarRecuperado = !!st._recuperado;
+  st._recuperado = false;
+  const bannerHtml = mostrarRecuperado
+    ? `<div class="draft-banner"><span>Rascunho recuperado, você pode continuar de onde parou.</span><button onclick="descartarRascunho('${key}')">Começar do zero</button></div>`
+    : '';
+
+  const uv = obterUltimos();
+  const chipHtml = (REPETIVEIS.includes(campo.key) && uv[campo.key])
+    ? `<button type="button" class="chip-repeat" onclick="repetirValor('${key}','${campo.key}')">↺ Repetir: ${esc(uv[campo.key])}</button>`
+    : '';
+
+  const temValidacao = ['contrato','nap_sistema','nap_conectada'].includes(campo.key);
+
+  view.innerHTML = `
+    <button class="back-btn" onclick="voltarHome('${key}')">‹ Voltar ao menu</button>
+    <div class="ticket">
+      <div class="ticket-head">
+        <h2>${NOMES[key]}</h2>
+        <div class="step-count">${doneCount+1}/${total}</div>
+      </div>
+      <div class="progress">${dots}</div>
+      ${bannerHtml}
+      ${answeredHtml}
+      <div class="q-label">Pergunta</div>
+      <div class="q-text">${esc(campo.pergunta)}</div>
+      ${isArea
+        ? `<textarea id="qinput" autofocus></textarea>`
+        : `<input id="qinput" type="${isNum?'number':'text'}" inputmode="${isNum?'numeric':(isData?'numeric':'text')}" ${isData?'maxlength="10" placeholder="DD/MM/AAAA"':''} autofocus>`}
+      ${temValidacao ? `<div class="fmt-warn" id="fmtWarn"></div>` : ''}
+      ${chipHtml}
+      <div class="btnrow">
+        ${doneCount>0 ? `<button class="btn-ghost" onclick="voltarPergunta('${key}')">‹ Voltar</button>` : ''}
+        <button class="btn-primary" onclick="responder('${key}','${campo.key}','${campo.tipo}')">Continuar</button>
+      </div>
+    </div>
+  `;
+
+  const inputEl = document.getElementById('qinput');
+  if(isData){
+    inputEl.addEventListener('input', ()=>{
+      let d = inputEl.value.replace(/\D/g,'').slice(0,8);
+      if(d.length>=5) d = d.slice(0,2)+'/'+d.slice(2,4)+'/'+d.slice(4);
+      else if(d.length>=3) d = d.slice(0,2)+'/'+d.slice(2);
+      inputEl.value = d;
+    });
+  }
+  if(temValidacao){
+    const fmtDiv = document.getElementById('fmtWarn');
+    inputEl.addEventListener('input', ()=>{
+      const msg = avisoFormato(campo.key, inputEl.value.trim());
+      fmtDiv.textContent = msg;
+      fmtDiv.classList.toggle('show', !!msg);
+    });
+  }
+  if(!isArea){
+    inputEl.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){ e.preventDefault(); responder(key, campo.key, campo.tipo); }
+    });
+  }
+  setTimeout(()=>inputEl.focus(), 30);
+}
+
+function labelDeCampo(key, campoKey){
+  // tenta achar o label percorrendo o flow reconstruindo estado parcial
+  const labels = {
+    tecnico:'Técnico', login:'Login', contrato:'Contrato', cidade:'Cidade', nap_sistema:'Nap Sistema',
+    nap_conectada:'Nap Conectada', data:'Data', motivo:'Motivo', supervisor:'Supervisor',
+    quantidade:'Quantidade', produto:'Produto', fato:'Fato', causa:'Causa', acao:'Ação',
+    log:'Log', rx:'RX', cod:'Cód.', validado:'Validado', janela:'Janela',
+    cod_baixa:'Cód. Baixa', observacao:'Observação'
+  };
+  if(labels[campoKey]) return labels[campoKey];
+  if(campoKey.startsWith('os_')) return 'O.S. '+campoKey.split('_')[1];
+  if(campoKey.startsWith('serial_')) return 'Serial '+campoKey.split('_')[1];
+  return campoKey;
+}
+
+function voltarPergunta(key){
+  const keys = Object.keys(state[key].values);
+  if(!keys.length) return;
+  const lastKey = keys[keys.length-1];
+  delete state[key].values[lastKey];
+  salvarRascunho(key);
+  renderPerguntas(key);
+}
+
+function responder(key, campoKey, tipo){
+  const val = document.getElementById('qinput').value.trim();
+  if(!val){ toast('Preencha antes de continuar'); return; }
+  state[key].values[campoKey] = val;
+  if(REPETIVEIS.includes(campoKey)) salvarUltimo(campoKey, val);
+  salvarRascunho(key);
+  renderPerguntas(key);
+}
+
+/* ============ RENDER: FINAL ============ */
+/* ============ RENDER: FOTO ============ */
+function renderFoto(key){
+  const st = state[key];
+  const multi = FOTO_TIPO[key]==='multi';
+  const view = document.getElementById('view-'+key);
+
+  view.innerHTML = `
+    <button class="back-btn" onclick="voltarHome('${key}')">‹ Voltar ao menu</button>
+    <div class="ticket">
+      <div class="ticket-head"><h2>${NOMES[key]}</h2><div class="step-count">foto</div></div>
+      <div class="q-label">Anexo (opcional)</div>
+      <div class="q-text">${multi ? 'Anexe foto(s) ou vídeo(s) do local, se quiser' : 'Anexe uma foto ou vídeo, se quiser'}</div>
+      <input type="file" id="fileInput" accept="image/*,video/*" ${multi?'multiple':''} style="display:none">
+      <div id="pickZone"></div>
+      <div class="photo-grid" id="photoGrid"></div>
+      <div id="mixWarning"></div>
+      <div class="btnrow">
+        <button class="btn-primary" id="fotoContinuar" onclick="confirmarFoto('${key}')">Continuar</button>
+      </div>
+      <div class="hint">A(s) foto(s)/vídeo(s) vêm da galeria do aparelho. Pode pular e enviar só o texto pelo WhatsApp.</div>
+    </div>
+  `;
+
+  const input = document.getElementById('fileInput');
+  input.addEventListener('change', ()=>{
+    const files = Array.from(input.files || []);
+    if(!multi) st.photos = [];
+    files.forEach(file=>{
+      const tipo = file.type && file.type.startsWith('video/') ? 'video' : 'image';
+      st.photos.push({file, url: URL.createObjectURL(file), tipo});
+    });
+    renderPickZone(key, multi);
+    renderPhotoGrid(key);
+    input.value = '';
+  });
+
+  renderPickZone(key, multi);
+  renderPhotoGrid(key);
+}
+
+function renderPickZone(key, multi){
+  const st = state[key];
+  const zone = document.getElementById('pickZone');
+  const galleryIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6" fill="currentColor" stroke="none"/><path d="M21 16l-5.5-5.5a1.5 1.5 0 0 0-2.1 0L5 19"/></svg>`;
+
+  if(!multi && st.photos.length>0){
+    const p = st.photos[0];
+    const midia = p.tipo==='video' ? `<video src="${p.url}" muted playsinline></video>` : `<img src="${p.url}">`;
+    zone.innerHTML = `
+      <div class="single-preview">
+        ${midia}
+        <div class="txt"><b>${p.tipo==='video' ? 'Vídeo anexado' : 'Foto anexada'}</b>Toque para trocar</div>
+        <label for="fileInput">Trocar</label>
+      </div>
+    `;
+    return;
+  }
+
+  zone.innerHTML = `
+    <label class="photo-zone" for="fileInput">
+      <div class="icon-circle">${galleryIcon}</div>
+      <div class="txt">
+        <p>Escolher da galeria</p>
+        <span>${multi ? 'Pode selecionar fotos e vídeos' : 'Selecione uma foto ou vídeo salvo no aparelho'}</span>
+      </div>
+    </label>
+  `;
+}
+
+function renderPhotoGrid(key){
+  const st = state[key];
+  const grid = document.getElementById('photoGrid');
+  grid.innerHTML = st.photos.map((p,i)=>`
+    <div class="photo-thumb">
+      ${p.tipo==='video' ? `<video src="${p.url}" muted playsinline></video>` : `<img src="${p.url}">`}
+      <button onclick="removerFoto('${key}',${i})">✕</button>
+    </div>
+  `).join('');
+  const btn = document.getElementById('fotoContinuar');
+  btn.textContent = st.photos.length ? 'Continuar' : 'Pular foto e continuar';
+
+  const mixDiv = document.getElementById('mixWarning');
+  if(mixDiv){
+    const tipos = [...new Set(st.photos.map(p=>p.tipo || 'image'))];
+    const misturado = tipos.length > 1;
+    mixDiv.innerHTML = misturado
+      ? `<div class="mix-warn show">⚠️ Foto e vídeo juntos: o WhatsApp não aceita esse envio combinado automaticamente. Depois de gerar o texto, anexe a foto e o vídeo separadamente, em mensagens diferentes.</div>`
+      : '';
+  }
+}
+function removerFoto(key,i){
+  state[key].photos.splice(i,1);
+  const multi = FOTO_TIPO[key]==='multi';
+  renderPickZone(key, multi);
+  renderPhotoGrid(key);
+}
+function confirmarFoto(key){
+  state[key].fotoConfirmada = true;
+  renderPerguntas(key);
+}
+
+/* ============ RENDER: FINAL ============ */
+/* ============ ENVIO PARA PLANILHA (NAP Lotada) ============ */
+const PLANILHA_NAP_LOTADA_URL = 'https://script.google.com/macros/s/AKfycbylJElszRt5dcbBka-OJ9rCUvkcwIcQjXuEZRZL-SI0oUCe-ODgswEqnGdbTmNUxB0d5Q/exec';
+
+function enviarParaPlanilha(v){
+  try{
+    fetch(PLANILHA_NAP_LOTADA_URL, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(v)
+    }).catch(()=>{
+      // sem internet ou bloqueio: o registro local (histórico/WhatsApp) continua normalmente
+    });
+  }catch(e){
+    // navegador sem suporte a fetch, etc: ignora e segue o fluxo normal
+  }
+}
+
+function renderFinal(key){
+  const st = state[key];
+  const texto = TEMPLATES[key](st.values);
+  const view = document.getElementById('view-'+key);
+  const temFoto = st.photos && st.photos.length;
+  const tiposFinal = temFoto ? [...new Set(st.photos.map(p=>p.tipo || 'image'))] : [];
+  const misturadoFinal = tiposFinal.length > 1;
+
+  salvarHistorico(NOMES[key], texto);
+  limparRascunho(key);
+
+  if(key==='nap_lotada' && !st.enviadoPlanilha){
+    enviarParaPlanilha(st.values);
+    st.enviadoPlanilha = true;
+  }
+
+  view.innerHTML = `
+    <button class="back-btn" onclick="voltarHome('${key}')">‹ Voltar ao menu</button>
+    <div class="ticket">
+      <div class="ticket-head"><h2>${NOMES[key]}</h2><div class="step-count">pronto</div></div>
+      <div class="report-box" id="reportBox">${esc(texto).replace(/\*(.+?):\*/g,'<b>$1:</b>')}</div>
+      ${temFoto ? `<div class="final-photos">${st.photos.map(p=>p.tipo==='video' ? `<video src="${p.url}" controls playsinline></video>` : `<img src="${p.url}">`).join('')}</div>` : ''}
+      ${misturadoFinal ? `<div class="mix-warn show">⚠️ Foto e vídeo juntos: ao clicar em "Enviar via WhatsApp", só o texto vai automaticamente. Anexe a foto e o vídeo manualmente, em mensagens separadas.</div>` : ''}
+      <div class="action-grid">
+        <button class="btn-primary" style="grid-column:1/-1;" onclick="copiar(TEMPLATES['${key}'](state['${key}'].values))">Copiar texto</button>
+        <button class="btn-whatsapp" onclick="enviarWhatsApp(TEMPLATES['${key}'](state['${key}'].values), state['${key}'].photos)">
+          <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5C9.4 8.7 9 7.6 8.8 7.2c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4C6.8 7.5 6.2 8.1 6.2 9.3s.8 2.4 1 2.6c.1.2 1.7 2.7 4.2 3.7 2.5 1 2.5.7 3 .6.4 0 1.3-.5 1.5-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.5-.4Z"/><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3.1 1.3 4.8 1.3Z" fill="none" stroke="#fff" stroke-width="1.4"/></svg>
+          Enviar via WhatsApp
+        </button>
+        <button class="btn-ghost" style="grid-column:1/-1;" onclick="voltarHome('${key}')">Nova consulta</button>
+      </div>
+      ${key==='nap_lotada' ? `<div class="hint">Este registro também foi enviado automaticamente para a planilha da equipe.</div>` : ''}
+      ${temFoto && !misturadoFinal ? `<div class="hint">O WhatsApp abre com o texto e o(s) anexo(s) prontos — em alguns navegadores pode ser preciso anexar a foto/vídeo manualmente.</div>` : ''}
+      ${!temFoto ? `<div class="hint">Copie o texto ou envie direto pelo WhatsApp.</div>` : ''}
+    </div>
+  `;
+}
+
+/* ============ CÓDIGOS DAS CIDADES (consulta, não gera texto) ============ */
+const CODIGOS_CIDADES = [
+  {codigo:'5',   cidade:'RIBEIRÃO PRETO'},
+  {codigo:'56',  cidade:'FRANCA'},
+  {codigo:'195', cidade:'SERTÃOZINHO'},
+  {codigo:'53',  cidade:'SÃO CARLOS'},
+  {codigo:'409', cidade:'ARARAQUARA'},
+  {codigo:'624', cidade:'AMÉRICO BRASILIENSE'},
+  {codigo:'442', cidade:'BARRINHA'},
+  {codigo:'448', cidade:'BATATAIS'},
+  {codigo:'569', cidade:'CRAVINHOS'},
+  {codigo:'592', cidade:'ORLÂNDIA'},
+  {codigo:'615', cidade:'SÃO JOAQUIM DA BARRA'},
+  {codigo:'587', cidade:'SERRANA'},
+  {codigo:'534', cidade:'MONTE ALTO'},
+  {codigo:'575', cidade:'JARDINÓPOLIS'},
+  {codigo:'297', cidade:'MATÃO'},
+  {codigo:'410', cidade:'JABOTICABAL'},
+  {codigo:'904', cidade:'SANTA ROSA DE VITERBO'},
+  {codigo:'674', cidade:'IBATÉ'},
+  {codigo:'844', cidade:'PONTAL'},
+  {codigo:'574', cidade:'ITUVERAVA'}
+];
+
+function abrirCodigos(){
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('view-codigos').classList.add('active');
+  renderCodigos();
+}
+function voltarHomeCodigos(){
+  document.getElementById('view-codigos').classList.remove('active');
+  document.getElementById('view-codigos').innerHTML = '';
+  document.getElementById('home').style.display = 'flex';
+}
+function renderCodigos(){
+  const view = document.getElementById('view-codigos');
+  view.innerHTML = `
+    <button class="back-btn" onclick="voltarHomeCodigos()">‹ Voltar ao menu</button>
+    <div class="ticket">
+      <div class="ticket-head"><h2>Códigos das Cidades</h2></div>
+      <div class="cod-table">
+        <div class="cod-row cod-head"><span>Código</span><span>Cidade</span></div>
+        ${CODIGOS_CIDADES.map(c=>`<div class="cod-row"><span>${esc(c.codigo)}</span><span>${esc(c.cidade)}</span></div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+aplicarTema();
+
+</script>
+</body>
+</html>
